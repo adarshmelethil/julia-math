@@ -66,6 +66,15 @@ function dfs(i)
     end
     return sum
 end
+function dsum(i)
+    sum = 0
+    while i > 0
+        remainder = i % 10
+        i ÷= 10
+        sum += remainder
+    end
+    return sum
+end
 
 function ans()
     x = 10
@@ -106,16 +115,40 @@ function test()
 
 end
 function solve()
-    x = 10:41730
-    y = [dfs(i) for i in x]
-    for (xx, yy) in zip(x,y)
-        if xx == yy
-            println(xx)
-        end
-    end
+    n = 9000000:9999999+1
+    p = Plots.plot(n, n)
 
-    p = Plots.plot(x, y, seriestype = :scatter)
-    Plots.plot!(p, x, x)
+    # allval = [dfs(i) for i in n]
+    # Plots.plot!(p, n, allval)
+
+    sums = [dfs(i) for i in n]
+    # print(sums)
+    Plots.plot!(p, n, sums,  seriestype = :scatter)
+
+
+    # nval = [(i, dfs(i)) for i in n]
+    # sorted_nval = sort(nval, by=x->x[2])
+    # new_x  = [x[1] for x in sorted_nval]
+    # for v in new_x
+    #     print(v," ")
+    # end
+    # println()
+    # newval = [x[2] for x in sorted_nval]
+    # Plots.plot!(p, n, new_x)
+
+
+    # x = []
+    # val = 5
+    # for nn in n
+    #     append!(x, val)
+    #     val += 10
+    # end
+    # xy = [dfs(i) for i in x]
+
+    # Plots.plot!(p, n, allval, seriestype = :scatter)
+    # Plots.plot!(p, n, allval)
+    # Plots.plot!(p, n, x)
+    # Plots.plot!(p, n, xy)
 end
 
 end
